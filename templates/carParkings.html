@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="page-title">
+    Registered parkings ({{ car["licensePlate"].upper() }})
+</div>
+
+<div class="mb-3 gap-2 d-flex">
+    <span>Filter by:</span>
+    <a href="{{ url_for('carParkings', id=car['id'], filter_type=2) }}" class="btn btn-sm btn-secondary">Going</a>
+    <a href="{{ url_for('carParkings', id=car['id'], filter_type=3) }}" class="btn btn-sm btn-secondary">Ended</a>
+    <a href="{{ url_for('carParkings', id=car['id'], filter_type=1) }}" class="btn btn-sm btn-primary">All</a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Car</th>
+                <th>Lot</th>
+                <th>Status</th>
+                <th>Start time</th>
+                <th>End time</th>
+                <th>Duration (Hours)</th>
+                <th>Rate</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parking in parkings %}
+            {% if parking["paymentGenerated"] != true %}
+            <tr>
+                <td>{{ parking["id"] }}</td>
+                <td>{{ parking["car"]["licensePlate"].upper() }}</td>
+                <td>{{ parking["parkingLot"]["tag"] }}</td>
+                <td>
+                    {% if parking["ended"] %}
+                    <span class="badge badge-danger">Ended</span>
+                    {% else %}
+                    <span class="badge badge-success">Going</span>
+                    {% endif %}
+                </td>
+                <td>{{ parking["startTime"] }}</td>
+                <td>
+                    {% if parking["endTime"] == None %}
+                    -
+                    {% else %}
+                    {{ parking["endTime"] }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if parking["duration"] == 0 %}
+                    -
+                    {% else %}
+                    {{ parking["duration"] }}
+                    {% endif %}
+                </td>
+                <td>${{ parking["rate"] }}</td>
+                <td>
+                    {% if parking["total"] == None %}
+                    -
+                    {% else %}
+                    ${{ parking["total"] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

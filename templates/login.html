@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/9ae4d8f0c6.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Parkware - Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #b0bac5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-wrapper {
+            background-color: #ffffff;
+            width: 1000px;
+            max-width: 95%;
+            height: 600px;
+            border-radius: 24px;
+            display: flex;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: visible;
+            padding: 20px;
+            gap: 20px;
+            position: relative;
+        }
+
+        /* Left Side: Form */
+        .login-left {
+            flex: 1;
+            padding: 40px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #112a38;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .logo i {
+            color: #0b8d86;
+            font-size: 1.5rem;
+        }
+
+        .login-title {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #112a38;
+            line-height: 1.2;
+            margin-bottom: 40px;
+        }
+
+        .text-teal {
+            color: #0b8d86;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: #f5f7f9;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            color: #2d3748;
+            outline: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus {
+            background-color: #ebf0f5;
+            box-shadow: 0 0 0 2px rgba(11, 141, 134, 0.2);
+        }
+
+        .password-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 40px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #718096;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .custom-checkbox {
+            width: 16px;
+            height: 16px;
+            background-color: #0b8d86;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-checkbox i {
+            color: white;
+            font-size: 10px;
+        }
+
+        .forgot-password {
+            color: #0b8d86;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-login {
+            background-color: #125e6e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: max-content;
+        }
+
+        .btn-login:hover {
+            background-color: #0c4653;
+        }
+
+        /* Right Side: Background Image & Overlapping Car */
+        .login-right {
+            flex: 1;
+            border-radius: 16px;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1500&auto=format&fit=crop') center center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .car-image {
+            position: absolute;
+            top: 55%;
+            left: -100px; /* Strong pop out into the left panel */
+            transform: translateY(-50%);
+            width: 135%; /* Large enough to show front view beautifully */
+            max-width: none;
+            z-index: 20;
+            filter: drop-shadow(-20px 20px 30px rgba(0,0,0,0.5));
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-left">
+            <div class="logo">
+                <i class="fa-solid fa-layer-group"></i> PARKWARE
+            </div>
+
+            <h1 class="login-title">
+                Enter Your <span class="text-teal">Email &</span><br>
+                <span class="text-teal">Password</span>
+            </h1>
+
+            <form action="{{ url_for('dashboard') }}" method="GET">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control" placeholder="example@gmail.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" class="form-control" placeholder="******************" required>
+                        <i class="fa-solid fa-eye password-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <div class="custom-checkbox">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        Keep me logged in
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+        </div>
+        <div class="login-right">
+            <!-- The background image handles the modern building scene -->
+            <img src="https://pngimg.com/uploads/bmw/bmw_PNG1704.png" alt="BMW" class="car-image">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="page-title">
+    Registered payments
+</div>
+
+<div class="mb-3 gap-2 d-flex">
+    <span>Filter by:</span>
+    <a href="{{ url_for('payments', filter_type=3) }}" class="btn btn-sm btn-secondary">Pending</a>
+    <a href="{{ url_for('payments', filter_type=2) }}" class="btn btn-sm btn-secondary">Paid</a>
+    <a href="{{ url_for('payments', filter_type=1) }}" class="btn btn-sm btn-primary">All</a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Car</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in payments %}
+            <tr>
+                <td>{{ p["id"] }}</td>
+                <td>{{ p["parking"]["car"]["licensePlate"].upper() }}</td>
+                <td>{{ p["date"] }}</td>
+                <td>${{ p["total"] }}</td>
+                <td>
+                    {% if p["paid"] %} 
+                    <span class="badge badge-success">Paid</span>
+                    {% else %} 
+                    <span class="badge badge-warning">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not p["paid"] %}
+                    <a href="{{ url_for('endPayment', id=p['id']) }}" title="Mark as Paid"><i class="fa-solid fa-check"></i></a>
+                    &nbsp;
+                    <a href="{{ url_for('deletePayment', id=p['id']) }}" title="Delete" class="btn-danger btn-sm" style="color:white;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
+                    {% else %}
+                    <a href="{{ url_for('deletePayment', id=p['id']) }}" title="Delete" class="btn-danger btn-sm" style="color:white;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

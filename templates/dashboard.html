@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="page-title">
+    Dashboard <span class="subtitle">Control panel</span>
+</div>
+
+<div class="dashboard-grid">
+    <a class="card card-primary" href="{{ url_for('cars') }}">
+        <h1>{{ totalCars }}</h1>
+        <p>Registered cars</p>
+    </a>
+    
+    <a class="card card-success" href="{{ url_for('parkings', filter_type=1) }}">
+        <h1>{{ totalActiveParkings }}</h1>
+        <p>
+            {% if totalActiveParkings > 1 or totalActiveParkings == 0 %}
+            Active parkings
+            {% else %}
+            Active parking
+            {% endif %}
+        </p>
+    </a>
+    
+    <a class="card card-secondary" href="{{ url_for('parkingLots', filter_type=1) }}">
+        <h1>{{ totalUnoccupiedLots }}/{{ totalLots }}</h1>
+        <p>Available parking lots</p>
+    </a>
+    
+    <a class="card card-info" href="{{ url_for('payments', filter_type=1) }}">
+        <h1>${{ totalPaidPaymentsToday }}</h1>
+        <p>Today total earnings</p>
+    </a>
+    
+    <a class="card card-warning" href="{{ url_for('payments', filter_type=3) }}">
+        <h1>{{ totalPendingPayments }}</h1>
+        <p>Pending payments</p>
+    </a>
+    
+    <a class="card card-danger" href="{{ url_for('parkings', filter_type=1) }}">
+        <h1>{{ totalParkingsToday }}</h1>
+        <p>Parkings today</p>
+    </a>
+</div>
+{% endblock %}

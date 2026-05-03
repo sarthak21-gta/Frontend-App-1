@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="page-title">
+    Edit a parking lot
+</div>
+
+<div class="form-container">
+    <form method="post">
+        <div class="form-group">
+            <label class="form-label">Tag (e.g. A1, B2)</label>
+            <input type="text" class="form-control" name="tag" value="{{ parkingLot['tag'] }}" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Update Lot</button>
+    </form>
+</div>
+{% endblock %}

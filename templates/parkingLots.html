@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="page-title">
+    Registered parking lots
+</div>
+
+<div class="mb-3 gap-2 d-flex">
+    <span>Filter by:</span>
+    <a href="{{ url_for('parkingLots', filter_type=3) }}" class="btn btn-sm btn-secondary">Occupied</a>
+    <a href="{{ url_for('parkingLots', filter_type=2) }}" class="btn btn-sm btn-secondary">Unoccupied</a>
+    <a href="{{ url_for('parkingLots', filter_type=1) }}" class="btn btn-sm btn-primary">All</a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tag</th>
+                <th>Occupied</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pl in parkingLots %}
+            <tr>
+                <td>{{ pl["id"] }}</td>
+                <td>{{ pl["tag"] }}</td>
+                <td>
+                    {% if pl["occupied"] %} 
+                    <span class="badge badge-danger">Yes</span>
+                    {% else %} 
+                    <span class="badge badge-success">No</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('editParkingLot', id=pl['id']) }}" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                    &nbsp;
+                    <a href="{{ url_for('deleteParkingLot', id=pl['id']) }}" title="Delete" class="btn-danger btn-sm" style="color:white;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

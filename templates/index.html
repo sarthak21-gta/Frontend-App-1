@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/9ae4d8f0c6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}?v=5">
+    <title>Parking Management</title>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <span>Parking System</span>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a href="{{ url_for('dashboard') }}">
+                        <i class="fa fa-gauge"></i> Dashboard
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{{ url_for('parkings', filter_type=1) }}">
+                        <i class="fa fa-square-parking"></i> Parkings
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ url_for('createParking') }}">Add Parking</a></li>
+                        <li><a href="{{ url_for('parkings', filter_type=1) }}">Manage Parkings</a></li>
+                    </ul>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{{ url_for('parkingLots', filter_type=1) }}">
+                        <i class="fa fa-table-list"></i> Lots
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ url_for('createParkingLot') }}">Add Lot</a></li>
+                        <li><a href="{{ url_for('parkingLots', filter_type=1) }}">Manage Lots</a></li>
+                    </ul>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{{ url_for('cars') }}">
+                        <i class="fa fa-car"></i> Cars
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ url_for('createCar') }}">Add Car</a></li>
+                        <li><a href="{{ url_for('cars') }}">Manage Cars</a></li>
+                    </ul>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="{{ url_for('payments', filter_type=1) }}">
+                        <i class="fa fa-money-bill"></i> Payments
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ url_for('payments', filter_type=1) }}">Manage Payments</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

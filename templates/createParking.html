@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="page-title">
+    Add a parking
+</div>
+
+<div class="form-container">
+    <form method="post">
+        <div class="form-group">
+            <label class="form-label">Start time</label>
+            <input type="time" class="form-control" name="startTime" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Car</label>
+            <select class="form-select" name="carId" required>
+                <option value="">Select a car</option>
+                {% for car in cars %}
+                <option value="{{ car['id'] }}">{{ car["licensePlate"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Parking lot</label>
+            <select class="form-select" name="parkingLotId" required>
+                <option value="">Select a lot</option>
+                {% for pl in parkingLots %}
+                <option value="{{ pl['id'] }}">{{ pl["tag"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Rate (Hour)</label>
+            <input type="number" class="form-control" name="rate" step="0.01" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Start Parking</button>
+    </form>
+</div>
+{% endblock %}

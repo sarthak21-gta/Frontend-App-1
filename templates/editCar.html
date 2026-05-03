@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="page-title">
+    Edit car
+</div>
+
+<div class="form-container">
+    <form method="post">
+        <div class="form-group">
+            <label class="form-label">License plate</label>
+            <input type="text" class="form-control" name="licensePlate" value="{{ car['licensePlate'] }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Brand</label>
+            <input type="text" class="form-control" name="brand" value="{{ car['brand'] }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Model</label>
+            <input type="text" class="form-control" name="model" value="{{ car['model'] }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Color</label>
+            <input type="text" class="form-control" name="color" value="{{ car['color'] }}" required>
+        </div> 
+        
+        <button type="submit" class="btn btn-primary">Update Car</button>
+    </form>
+</div>
+{% endblock %}

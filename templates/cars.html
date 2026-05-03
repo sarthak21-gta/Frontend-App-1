@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="page-title">
+    Registered cars
+</div>
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>License plate</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car["id"] }}</td>
+                <td>{{ car["licensePlate"].upper() }}</td>
+                <td>{{ car["brand"].upper() }}</td>
+                <td>{{ car["model"].upper() }}</td>
+                <td>{{ car["color"] }}</td>
+                <td>
+                    <a href="{{ url_for('carParkings', id=car['id'], filter_type=1) }}" title="Parking History"><i class="fa-solid fa-receipt"></i></a>
+                    &nbsp;
+                    <a href="{{ url_for('editCar', id=car['id']) }}" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                    &nbsp;
+                    <a href="{{ url_for('deleteCar', id=car['id']) }}" title="Delete" class="btn-danger btn-sm" style="color:white;text-decoration:none;"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
