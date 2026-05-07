@@ -54,3 +54,5 @@ supabase login
 supabase link --project-ref your-project-ref
 supabase db push
 ```
+site link https://parking-management-main.vercel.app/login
+
